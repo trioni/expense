@@ -1,0 +1,89 @@
+.summary {
+  .-negative {
+    .summary__deviation {
+      color: #D87575;
+    }
+  }
+  .-positive {
+    .summary__deviation {
+      color: #65af58;
+    }
+  }
+
+  .summary__user {
+    background-color: #FFFFFF;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+}
+
+.summary__title {
+  text-align: center;
+}
+
+.summary__title + .col-xs-12 {
+
+}
+
+.summary__stat {
+  @extend %border-radius;
+  background-color: #f2f2f2;
+  border: 1px solid #dddddd;
+  margin-bottom: 1.5em;
+  margin-top: 8px;
+  padding: 1em;
+}
+
+.summary__user {
+  overflow: hidden;
+  margin: 1em -1em -1em;
+  padding: .5em 1em;
+}
+
+.summary__name {
+  float: left;
+  text-transform: uppercase;
+}
+
+.summary__amount {
+  float: right;
+}
+
+.summary__deviation {
+  display: block;
+  font-size: 2em;
+  text-align: center;
+  width: 100%;
+}
+
+.summary__mean {
+  $size: 130px;
+  $overlap: 50px;
+  background-color: #FFFFFF;
+  border: 1px solid #dddddd;
+  border-radius: $size;
+  height: $size;
+  margin: 0 auto;
+  margin-top: -$overlap;
+  position: relative;
+  top: $overlap;
+  width: $size;
+  z-index: 1;
+
+  .summary__amount,
+  .summary__name {
+    display: block;
+    float: none;
+    text-align: center;
+  }
+
+  .summary__amount {
+    font-size: 2em;
+    line-height: 1;
+  }
+
+  .vertically-centered {
+    margin-top: -5px;
+  }
+}
+

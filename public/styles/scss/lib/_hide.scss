@@ -1,0 +1,81 @@
+// Completely hide element (screenreaders, robots and visually)
+
+@mixin hide {
+	display: none;
+	visibility: hidden;
+}
+
+// Show element
+
+@mixin show {
+	display: block;
+	visibility: visible;
+}
+
+// Visually hide element, , but still visible for screenreaders
+
+@mixin visuallyhidden {
+	margin: -1px;
+	padding: 0;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip: rect(0, 0, 0, 0);
+	position: absolute;
+}
+
+// Show/display visuallu hidden elements
+
+@mixin show-visuallyhidden {
+	margin: 0;
+	padding: 0;
+	width: auto;
+	height: auto;
+	overflow: visible;
+	clip: auto;
+}
+
+// Hide text
+
+@mixin hide-text {
+	text-indent: 200%;
+	white-space: nowrap;
+	overflow: hidden;
+	display: block;
+}
+
+// Classnames and placeholders
+
+%hide,
+.hide {
+	@include hide;
+}
+
+%show,
+.show {
+	@include show;
+}
+
+%hidden,
+.hidden {
+	visibility: hidden;
+}
+
+%visible,
+.visible {
+	visibility: visible;
+}
+
+%visuallyhidden,
+.visuallyhidden {
+	@include visuallyhidden;
+}
+
+%show-visuallyhidden {
+	@include show-visuallyhidden;
+}
+
+%hide-text {
+	@include hide-text;
+}

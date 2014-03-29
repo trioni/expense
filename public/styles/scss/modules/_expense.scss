@@ -1,0 +1,136 @@
+%item-height {
+  height: 65px;
+}
+
+%left {
+  float: left;
+}
+
+%transition {
+  transition: all 0.3s ease-out 0.1s;
+}
+
+$gray-light: #F2F2F2;
+
+.expense .-excluded {
+  background-color: bisque;
+}
+
+.expense__owner {
+  font-size: 12px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.expense__title,
+.amount {
+  font-size: 20px;
+}
+
+.expense--excluded,
+.amount {
+  float: right;
+}
+
+.expense--excluded {
+  margin-right: 10px;
+}
+
+.type {
+  margin-top: 2px;
+  margin-left: 10px;
+}
+
+.expense__frame {
+  height: 65px;
+  overflow: hidden;
+
+  &.open {
+    box-shadow: inset 6px 1px 9px -8px;
+  }
+}
+
+.expense__container {
+  @extend %transition;
+  left: 0;
+  position: relative;
+}
+
+.expense__container.open {
+  left: -180px;
+}
+
+
+
+.expense__body {
+  @extend %left;
+  padding: 10px 25px 10px 15px;
+  left: 0;
+  width: 100%;
+}
+
+.list-group-item {
+  padding: 0;
+}
+
+$toggle-size: 15px;
+
+.actions {
+  @extend %item-height;
+  background-color: $gray-light;
+  overflow: hidden;
+  padding-left: 25px;
+  position: absolute;
+  top: 0;
+  left: calc(100% - 15px);
+  width: 300px;
+
+  a {
+    float: left;
+    margin-right: 10px;
+    @include vertical-align;
+  }
+}
+
+.actions__toggle {
+  background-color: darken($gray-light,5%);
+  border: none;
+  color: #FFFFFF;
+  font-size: .666666667em;
+  height: 100%;
+  left: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: $toggle-size;
+
+  > span {
+    @extend .glyphicon;
+    @extend .glyphicon-chevron-left;
+    left: -1px;
+    width: 10px;
+  }
+
+  .open & > span {
+    @extend .glyphicon-chevron-right;
+  }
+}
+
+.field-type {
+  display: flex;
+  flex-flow: row wrap;
+
+  > * {
+    flex: 1 33%;
+  }
+}
+
+#add-form .field-type > *,
+#edit-form .field-type > * {
+  border-radius: 0;
+}
+
+#add-form .btn+.btn,
+#edit-form .btn+.btn {
+  margin-left: 0;
+}
