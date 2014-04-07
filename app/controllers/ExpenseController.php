@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\MessageBag;
+
 class ExpenseController extends BaseController {
 
 	/**
@@ -20,8 +22,7 @@ class ExpenseController extends BaseController {
 	public function create()
 	{
         return View::make('expenses.create')->with(array(
-            'titles'=> json_encode($this->getTitles()),
-            'slug'=> Lang::get('app.pages.add.title')
+            'titles'=> json_encode($this->getTitles())
         ));
 	}
 
@@ -47,9 +48,9 @@ class ExpenseController extends BaseController {
         ));
 	}
 
-    public function filter()
+    private function getFilteredExpenses()
     {
-        $query = Expense::orderBy('created_at','desc');
+        $query = Expense::orderBy('created_at','desc')->whereNull('deleted_at');
 
         $owner = Request::query('owner');
         $type = Request::query('type');
@@ -81,11 +82,14 @@ class ExpenseController extends BaseController {
             $query->take( Config::get('app.pagesize') );
         }
         $result = $query->paginate( Config::get('app.pagesize') );
+        return $result;
 
+    }
+
+    public function filter()
+    {
         return View::make('expenses.index')->with(array(
-            'summary' => new Summary(),
-            'filtered' => $result,
-            'slug'=>Lang::get('app.pages.overview.title')
+            'filtered' => $this->getFilteredExpenses()
         ));
     }
 
@@ -111,8 +115,7 @@ class ExpenseController extends BaseController {
         $expense = Expense::find($id);
         return View::make('expenses.edit')->with(array(
             'titles'=> json_encode($this->getTitles()),
-            'expense'=> $expense,
-            'slug'=>Lang::get('app.pages.edit.title') . ' ' . $expense->title
+            'expense'=> $expense
         ));
 	}
 
@@ -144,6 +147,15 @@ class ExpenseController extends BaseController {
         }
 	}
 
+    private function getRestoreMessage( $id, $title )
+    {
+        $msg = Lang::get('app.feedback.delete.success', array('title'=>$title));
+        $msg .= ' <a href="'. action('ExpenseController@restore', $id) .'">'. Lang::get('app.feedback.delete.restore') .'</a>';
+        $messagebag = new MessageBag();
+        $messagebag->add('deleted', $msg);
+        return $messagebag;
+    }
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -158,7 +170,7 @@ class ExpenseController extends BaseController {
             $title = $expense->title;
             $expense->delete();
             return Redirect::to('/')->with('flash_message', array(
-                'msg'=>Lang::get('app.feedback.delete.success',array('title'=>$title)),
+                'msg'=> $this->getRestoreMessage($id, $title),
                 'status'=>'success'
             ));
         }
@@ -175,8 +187,17 @@ class ExpenseController extends BaseController {
     {
         $expense = Expense::findOrFail($id);
         return View::make('expenses.delete')->with(array(
-            'expense'=> $expense,
-            'slug'=>Lang::get('app.pages.delete.title') . ' ' . $expense->title
+            'expense'=> $expense
+        ));
+    }
+
+    public function restore($id)
+    {
+        Expense::onlyTrashed()->where('id', $id)->restore();
+        $expense = Expense::withTrashed()->where('id', $id)->first();
+        return Redirect::to('/')->with('flash_message', array(
+            'msg'=> Lang::get('app.feedback.restore.restored', array('title'=>$expense->title)),
+            'status'=>'success'
         ));
     }
 

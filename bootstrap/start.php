@@ -58,8 +58,6 @@ $framework = $app['path.base'].'/vendor/laravel/framework/src';
 
 require $framework.'/Illuminate/Foundation/start.php';
 
-require app_path().'/views/macro.php';
-
 /*
 |--------------------------------------------------------------------------
 | Return The Application

@@ -14,7 +14,10 @@
         <div class="actions">
             <button class="actions__toggle"><span></span></button>
             <a href="{{ action('ExpenseController@edit', $expense->id)  }}" class="btn btn-default">{{ Lang::get('app.actions.edit') }}</a>
-            <a href="{{ action('ExpenseController@delete', $expense->id) }}" class="btn btn-warning">{{ Lang::get('app.actions.delete') }}</a>
+
+            {{ Form::open(array('method'=>'DELETE','route'=>array('expenses.destroy',$expense->id),'class'=>'delete-form')) }}
+            {{ Form::submit(Lang::get('app.actions.delete') ,array('class'=>'btn btn-warning')) }}
+            {{ Form::close() }}
         </div>
     </div>
 </div>

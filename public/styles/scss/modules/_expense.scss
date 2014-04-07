@@ -85,7 +85,8 @@ $toggle-size: 15px;
   left: calc(100% - 15px);
   width: 300px;
 
-  a {
+  a,
+  form {
     float: left;
     margin-right: 10px;
     @include vertical-align;

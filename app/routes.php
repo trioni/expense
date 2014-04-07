@@ -22,6 +22,8 @@ Route::get('logout', 'SessionsController@destroy');
 Route::get('autocomplete/title', 'AutocompleteController@foo');
 Route::get('expenses/filter', 'ExpenseController@filter');
 Route::get('expenses/delete/{id}', 'ExpenseController@delete');
+Route::get('expenses/trash/{id}', 'ExpenseController@trash');
+Route::get('expenses/restore/{id}', 'ExpenseController@restore');
 Route::resource('sessions','SessionsController', ['only' => ['store','destroy','create']]);
 Route::resource('expenses','ExpenseController');
 

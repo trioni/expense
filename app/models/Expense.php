@@ -7,6 +7,7 @@ class Expense extends Elegant {
      * @var string
      */
     protected $table = 'expenses';
+    protected $softDelete = true;
 
     protected $guarded = array('id','created_at');
 

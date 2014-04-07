@@ -10,7 +10,7 @@ class SessionsController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('sessions.create');
+        return View::make('sessions.create')->with('slug', Lang::get('app.pages.login.title'));
 	}
 
 	/**
@@ -26,12 +26,11 @@ class SessionsController extends BaseController {
 
         if($attempt)
         {
-            return Redirect::intended('/')->with('flash_message','Inloggad');
+            return Redirect::intended('/')->with('flash_message',array('msg'=>'Inloggad','status'=>'success'));
         }
         else
         {
-            dd('Fail');
-            Redirect::back()->with('flash_message', 'Felaktiga inloggningsuppgifter')->withInput();
+            Redirect::back()->with('flash_message',array('msg'=>'Felaktiga inloggningsuppgifter'))->withInput();
         }
 	}
 

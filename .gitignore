@@ -16,3 +16,5 @@ public/node_modules
 public/bower_components
 public/styles/scss/bourbon/
 .idea
+deploy.sh
+deploy_excludes.txt

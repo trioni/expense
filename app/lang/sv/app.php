@@ -30,7 +30,7 @@ return array(
         'labels'=>array(
             'date'=>'Datum',
             'title'=>'Titel',
-            'include'=>'Inkludera i summering'
+            'include'=>'Delad utgift'
         )
     ),
     'feedback'=>array(
@@ -42,7 +42,11 @@ return array(
         ),
         'delete'=>array(
             'success'=>'Utgiften ":title" är borttagen.',
-            'nonexisting'=>'Du försöker ta bort något som inte finns'
+            'nonexisting'=>'Du försöker ta bort något som inte finns',
+            'restore'=>'Klicka här för att ångra'
+        ),
+        'restore'=>array(
+            'restored'=>':title är återställd.'
         )
     ),
     'pages'=>array(
@@ -57,6 +61,9 @@ return array(
         ),
         'delete'=>array(
             'title'=>'Ta bort'
+        ),
+        'login'=>array(
+            'title'=>'Logga in'
         )
     )
 );
