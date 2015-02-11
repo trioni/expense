@@ -22,4 +22,11 @@
         </div>
         @endforeach
     </div>
+    <div class="row">
+        <ol class="top-types">
+        @foreach($summary->typesTotal as $type)
+            <li class="label {{ HTML::color_by_option($type['value']) }}">{{$type['label']}} <span class="sum">{{$type['total']}}</span></li>
+        @endforeach
+        </ol>
+    </div>
 </div>
