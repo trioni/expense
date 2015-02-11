@@ -1,3 +1,7 @@
+# Disable php5.6 deprecated value
+php_value mbstring.http_input pass
+php_value mbstring.http_output pass
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews

@@ -1,0 +1,6 @@
+<div class="form-group btn-group btn-group mandatory field-type" data-toggle="buttons">
+    <label ng-repeat="type in appConfig.types" class="btn btn-default[[ item.type | isActive:type.value ]]">
+        <input type="radio" name="type" ng-model="item.type" value="[[type.value]]" required />
+        [[type.label]]
+    </label>
+</div>

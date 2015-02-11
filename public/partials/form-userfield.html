@@ -1,0 +1,6 @@
+<div class="form-group btn-group btn-group-justified mandatory" data-toggle="buttons" data-error="Val saknas">
+    <label ng-repeat="user in appConfig.users" class="btn btn-default[[ item.owner | isActive:user.value ]]">
+        <input type="radio" name="owner" ng-model="item.owner" id="[[ user.value ]]" value="[[ user.value ]]" required />
+        [[user.display]]
+    </label>
+</div>

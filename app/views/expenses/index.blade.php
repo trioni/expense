@@ -3,6 +3,9 @@
 @section('content')
 @include('partials.summary')
 
+@if ( Config::get('app.angular') )
+<div ng-view></div>
+@endif
 <div class="row">
     <div class="col-xs-12">
         <h2>{{ Lang::get('app.list.title') }}</h2>
@@ -16,6 +19,15 @@
         @endforeach
     </div>
 
+
+@if ( Config::get('app.angular') )
+    <div class="col-xs-12" ng-controller="ListCtrl as list">
+        <p class="list-summary">[[ list.summary ]]</p>
+        <div class="list-group">
+            @include('expenses.angular.expense--single')
+        </div>
+    </div>
+@else
     @if( count( $filtered ) == 0)
     <div class="col-xs-12">
         <p>Här var det tomt...</p>
@@ -31,6 +43,7 @@
         </div>
     </div>
     @endif
+@endif
 </div>
 
 <div class="row">

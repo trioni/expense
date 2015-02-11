@@ -1,0 +1,31 @@
+<form ng-controller="EditCtrl as ctrl" ng-submit="save()">
+    <h2>Edit [[ item.title ]]</h2>
+    <form-userfield></form-userfield>
+
+    <div class="form-group mandatory">
+        <label for="title">Title</label>
+        <input id="title" class="form-control typeahead" ng-model="item.title" placeholder="Title" type="text" value=""/>
+    </div>
+
+    <form-typefield></form-typefield>
+
+    <div class="form-group input-group mandatory">
+        <span class="input-group-addon">$</span>
+        <input class="form-control" name="expense" type="number" ng-model="item.expense" />
+        <span class="input-group-addon">hkd</span>
+    </div>
+
+    <div class="form-group">
+        <label for="date">Datum</label>
+        <input class="form-control" ng-model="item.displayDate" name="date" type="date" id="date">
+    </div>
+
+    <div class="form-group">
+        <label>
+            <input ng-model="item.include" type="checkbox"/>
+            Delad utgift
+        </label>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Save" />
+</form>

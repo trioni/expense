@@ -88,6 +88,10 @@ class ExpenseController extends BaseController {
 
     public function filter()
     {
+        if( Input::has('json-response') )
+        {
+            return Response::json($this->getFilteredExpenses());
+        }
         return View::make('expenses.index')->with(array(
             'filtered' => $this->getFilteredExpenses()
         ));
@@ -113,6 +117,11 @@ class ExpenseController extends BaseController {
 	public function edit($id)
 	{
         $expense = Expense::find($id);
+
+        if(Input::has('json-response'))
+        {
+            return Response::json($expense);
+        }
         return View::make('expenses.edit')->with(array(
             'titles'=> json_encode($this->getTitles()),
             'expense'=> $expense
@@ -128,22 +137,38 @@ class ExpenseController extends BaseController {
 	public function update($id)
 	{
 		$expense = Expense::findOrFail($id);
-        $expense->fill(Input::all());
+        $ip = Input::except('displayDate','json-response');
+        $expense->fill( $ip );
 
         if($expense->validate())
         {
             $expense->save();
-            return Redirect::back()->with('flash_message', array(
-                'msg'=>Lang::get('app.feedback.update.success'),
-                'status'=>'success'
-            ));
+
+            $response_data = array(
+                'msg'=> Lang::get('app.feedback.update.success'),
+                'status'=>'success',
+            );
+
+            if( Input::has('json-response') )
+            {
+                $response_data['item'] = json_decode($expense);
+                return Response::json($response_data);
+            }
+            return Redirect::back()->with('flash_message', $response_data);
         }
         else
         {
-            return Redirect::back()->with('flash_message', array(
-                'msg'=> $expense->errors(),
-                'status'=>'danger'
-            ));
+            $response_data = array(
+                'msg' => $expense->errors(),
+                'status' => 'danger',
+            );
+
+            if( Input::has('json-response') )
+            {
+                return Response::json($response_data);
+            }
+
+            return Redirect::back()->with('flash_message', $response_data);
         }
 	}
 
