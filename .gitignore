@@ -12,7 +12,6 @@ logs
 
 # App
 */.sass-cache
-app/config/users.php
 public/node_modules
 public/bower_components
 public/styles/scss/bourbon/
