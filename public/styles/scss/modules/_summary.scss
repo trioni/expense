@@ -92,33 +92,13 @@
 }
 
 .summary__mean {
-  $size: 130px;
-  $overlap: 50px;
-  background-color: #FFFFFF;
-  border: 1px solid #dddddd;
-  border-radius: $size;
-  height: $size;
   margin: 0 auto;
-  margin-top: -$overlap;
-  position: relative;
-  top: $overlap;
-  width: $size;
-  z-index: 1;
+  text-align: center;
 
   .summary__amount,
   .summary__name {
-    display: block;
+//    display: block;
     float: none;
-    text-align: center;
-  }
-
-  .summary__amount {
-    font-size: 2em;
-    line-height: 1;
-  }
-
-  .vertically-centered {
-    margin-top: -5px;
   }
 }
 

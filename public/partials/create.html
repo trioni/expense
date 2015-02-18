@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h2 class="modal-title">Edit [[ item.title ]]</h2>
+    <h2 class="modal-title">Lägg till</h2>
 </div>
 <div class="modal-body">
     <form>
@@ -7,7 +7,6 @@
 
         <div class="form-group mandatory autocomplete">
             <label for="title">Title</label>
-            <!--<input id="title" class="form-control typeahead" ng-model="item.title" placeholder="Title" type="text" value=""/>-->
             <input id="title" class="form-control" ng-model="item.title" typeahead="title for title in config.titles | filter:$viewValue | limitTo:8" placeholder="Title" type="text" value=""/>
         </div>
 
@@ -36,4 +35,3 @@
     <button class="btn btn-primary" type="submit" ng-click="save()">Save</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
-

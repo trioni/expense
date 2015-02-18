@@ -18,10 +18,10 @@ class Spender {
         return intval($total);
     }
 }
+
 class Summary {
     private $meanSpending = 0;
     private $spenders = array();
-    public $typesTotal = array();
 
     function __construct()
     {
@@ -33,7 +33,6 @@ class Summary {
 
         $this->diff = $this->getPositiveDiff($leader->total, $this->getMeanSpending());
         $this->split = $this->diff / count( $this->spenders );
-        $this->typesTotal = $this->getTypesTotal();
     }
 
     public function __get($property)
@@ -81,35 +80,5 @@ class Summary {
             return -$spender->total;
         }));
         return $sorted[0];
-    }
-
-    //--- Get the total for each type ---//
-    private function getTypeTotal( $type )
-    {
-        $query = DB::table('expenses')->whereNull('deleted_at')->where('type',$type);
-        $result = $query->remember(5)->sum('expense');
-        return $result;
-    }
-
-    private function getTypesTotal()
-    {
-        $typesTotal = array();
-
-        foreach(Config::get('types') as $type ) {
-            array_push($typesTotal, array(
-                'label' => $type['label'],
-                'value' => $type['value'],
-                'total' => intval($this->getTypeTotal($type['value'])),
-            ));
-        }
-
-        usort($typesTotal, function($a, $b) {
-            return $a['total'] - $b['total'];
-        });
-
-        // Reverse the array for correct output when looping
-        $typesTotal = array_reverse($typesTotal);
-
-        return $typesTotal;
     }
 }

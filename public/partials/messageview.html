@@ -1,1 +1,4 @@
-<p class="messageview [[data.status | statusClass ]]" ng-show="!hidden">[[data.msg]]</p>
+<p class="messageview [[data.status | statusClass ]]" ng-show="!hidden">[[data.msg]]
+    <button class="btn btn-default messageview__action" ng-if="data.action" ng-click="takeAction(data.action)">[[data.action.text]]</button>
+    <button ng-if="data.action" ng-click="hide()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</p>

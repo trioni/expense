@@ -40,8 +40,17 @@ class ExpenseController extends BaseController {
 	 */
 	public function store()
 	{
-        $expense = new Expense(Input::all());
+        $expense = new Expense(Input::except('displayDate','json-response','_token'));
         $expense->save();
+        if( Input::has('json-response') ) {
+            $response_data = array(
+                'msg'=> $expense->title . ' ' . Lang::get('app.feedback.save.success'),
+                'status'=>'success',
+            );
+
+            $response_data['item'] = json_decode($expense);
+            return Response::json($response_data);
+        }
         return Redirect::back()->with('flash_message',array(
             'msg'=> Lang::get('app.feedback.save.success'),
             'status'=>'success'
@@ -92,6 +101,14 @@ class ExpenseController extends BaseController {
         {
             return Response::json($this->getFilteredExpenses());
         }
+
+        if( Config::get('app.frontend') == 'angular' )
+        {
+            return View::make('expenses.angular.index')->with(array(
+                'filtered' => $this->getFilteredExpenses()
+            ));
+        }
+
         return View::make('expenses.index')->with(array(
             'filtered' => $this->getFilteredExpenses()
         ));
@@ -145,7 +162,7 @@ class ExpenseController extends BaseController {
             $expense->save();
 
             $response_data = array(
-                'msg'=> Lang::get('app.feedback.update.success'),
+                'msg'=> $expense->title . ' ' . Lang::get('app.feedback.update.success'),
                 'status'=>'success',
             );
 
@@ -194,6 +211,14 @@ class ExpenseController extends BaseController {
             $expense = Expense::findOrFail($id);
             $title = $expense->title;
             $expense->delete();
+            if( Input::has('json-response') ) {
+                return Response::json([
+                    'msg' => 'Soft deleting ' . $title,
+                    'status' => 'success',
+                    'id' => $id,
+                    'data'=> json_decode($expense),
+                ]);
+            }
             return Redirect::to('/')->with('flash_message', array(
                 'msg'=> $this->getRestoreMessage($id, $title),
                 'status'=>'success'
@@ -201,6 +226,14 @@ class ExpenseController extends BaseController {
         }
         catch (Exception $e)
         {
+            Log::error($e);
+            if( Input::has('json-response') ) {
+                return Response::json([
+                    'msg'=>'Unknown error',
+                    'status'=>'error',
+                    'exception'=> $e,
+                ]);
+            }
             return Redirect::to('/')->with('flash_message', array(
                 'msg'=>Lang::get('app.feedback.delete.nonexisting'),
                 'status'=>'danger'
@@ -220,6 +253,13 @@ class ExpenseController extends BaseController {
     {
         Expense::onlyTrashed()->where('id', $id)->restore();
         $expense = Expense::withTrashed()->where('id', $id)->first();
+        if( Input::has('json-response') ) {
+            return Response::json([
+                'msg'=>'Restored',
+                'status'=>'success',
+                'data'=> json_decode($expense),
+            ]);
+        }
         return Redirect::to('/')->with('flash_message', array(
             'msg'=> Lang::get('app.feedback.restore.restored', array('title'=>$expense->title)),
             'status'=>'success'

@@ -175,5 +175,5 @@ return array(
 
 	),
     'pagesize' => 20,
-    'angular' => false,
+    'frontend' => 'angular', // available options: 'blade', 'angular'
 );

@@ -1,0 +1,5 @@
+<ul class="nav nav-pills pull-right">
+    <li ng-repeat="item in items" class="[[item.name | isActive:active]]">
+        <a href="[[ item.href ]]" ng-click="setActive(item.name)">[[ item.label ]]</a>
+    </li>
+</ul>

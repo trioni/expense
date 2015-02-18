@@ -2,10 +2,8 @@
     <h3 class="summary__title">{{ Lang::get('app.summary.title') }}</h3>
     <div class="col-xs-12">
         <div class="summary__mean">
-            <div class="vertically-centered">
-                <span class="summary__name">{{ Lang::get('app.summary.mean') }}</span>
-                <span class="summary__amount">{{ $summary->meanSpending }}</span>
-            </div>
+            <span class="summary__name">{{ Lang::get('app.summary.mean') }}</span>
+            <span class="summary__amount">{{ $summary->meanSpending }}</span>
         </div>
     </div>
     <div class="row">
@@ -22,11 +20,11 @@
         </div>
         @endforeach
     </div>
-    <div class="row">
-        <ol class="top-types">
-        @foreach($summary->typesTotal as $type)
-            <li class="label {{ HTML::color_by_option($type['value']) }}">{{$type['label']}} <span class="sum">{{$type['total']}}</span></li>
-        @endforeach
-        </ol>
-    </div>
+    {{--<div class="row">--}}
+        {{--<ol class="top-types">--}}
+        {{--@foreach($chartData as $type)--}}
+            {{--<li class="label {{ HTML::color_by_option($type['value']) }}">{{$type['label']}} <span class="sum">{{$type['total']}}</span></li>--}}
+        {{--@endforeach--}}
+        {{--</ol>--}}
+    {{--</div>--}}
 </div>
