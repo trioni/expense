@@ -1,4 +1,4 @@
-<div class="list-group-item expense" ng-repeat="item in list.items | orderBy:predicate" ng-controller="ListItemCtrl">
+<div class="list-group-item expense" ng-repeat="item in list.items track by item.id | orderBy:predicate" ng-controller="ListItemCtrl">
     <div class="expense__frame [[item|excludedClass]]" ng-class="actionState">
         <div class="expense__container" ng-class="actionState">
             <div class="expense__body">
