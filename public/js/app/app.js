@@ -5,10 +5,12 @@ if (!String.prototype.includes) {
     };
 }
 
-var app = angular.module('expenses', ['ngRoute','ui.bootstrap','googlechart'], function($interpolateProvider) {
+var app = angular.module('expenses', ['ngRoute','ui.bootstrap','googlechart', function($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
-}).constant('CSRF_TOKEN', window.app.csrf_token);
+}]);
+
+app.constant('CSRF_TOKEN', window.app.csrf_token);
 
 app.config(['$routeProvider', function($routeProvider) {
 

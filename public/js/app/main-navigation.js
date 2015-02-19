@@ -20,14 +20,14 @@ app.controller('MainNavigationCtrl', ['$scope', function($scope) {
             href: '/#/home'
         },
         {
-            name: 'create',
-            label: 'Lägg till',
-            href: '/#/expenses/create'
-        },
-        {
             name: 'statistics',
             label: 'Statistik',
             href: '/#/statistics'
+        },
+        {
+            name: 'create',
+            label: 'Lägg till',
+            href: '/#/expenses/create'
         }
     ];
 

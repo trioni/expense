@@ -18,7 +18,7 @@ app.controller('EditModalCtrl', ['$scope','appConfig','routeBuilder','ExpenseRes
     $scope.$on('edit-saved', function(e,response) {
         routes.goto('home');
         $modalInstance.close(response.item);
-        $rootScope.$emit('item-update', response.item);
+        $rootScope.$broadcast('item-update', response.item);
     });
 
     store.load();

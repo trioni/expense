@@ -22,8 +22,8 @@ module.exports = function (grunt) {
                 tasks: ['sass:dev','autoprefixer']
             },
             scripts: {
-                files: ['js/scripts.js'],
-                tasks: ['uglify']
+                files: ['js/app/*.js'],
+                tasks: ['uglify:angular']
             }
         }
     });
@@ -34,5 +34,5 @@ module.exports = function (grunt) {
 //    grunt.registerTask('default', ['uglify','sass:dist','clean:svg','svgmin','rename','grunticon:dist']);
 //    grunt.registerTask('svg', ['clean:svg','svgmin','rename','grunticon']);
     grunt.registerTask('styles', ['sass:dev','autoprefixer']);
-    grunt.registerTask('js', ['uglify']);
+    grunt.registerTask('js', ['uglify:angular']);
 };

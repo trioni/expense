@@ -18,7 +18,7 @@ app.controller('CreateModalCtrl', ['$scope','appConfig','routeBuilder','ExpenseR
     $scope.$on('create-saved', function(e,response) {
         routes.goto('home');
         $modalInstance.close(response.item);
-        $rootScope.$emit('item-created', response.item);
+        $rootScope.$broadcast('item-created', response.item);
     });
 }]);
 

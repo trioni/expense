@@ -8,7 +8,7 @@ app.controller('ListCtrl', ['$http', '$log', '$scope','$rootScope','ExpenseResou
         $scope.updateItem(updatedItem);
     });
 
-    $rootScope.$on('item-created', function(e, createdItem) {
+    $scope.$on('item-created', function(e, createdItem) {
         $scope.add(createdItem);
     });
 
@@ -17,7 +17,6 @@ app.controller('ListCtrl', ['$http', '$log', '$scope','$rootScope','ExpenseResou
     });
 
     $scope.$on('$destroy', function() {
-        console.log('<<< Destroying listener >>>');
         itemRestored(); // remove listener.
     });
 
