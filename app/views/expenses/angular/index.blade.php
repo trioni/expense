@@ -22,7 +22,7 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <pagination ng-hide="numPages < 2" ng-controller="PagingCtrl" ng-model="currentPage" num-pages="numPages" total-items="totalItems" items-per-page="itemsPerPage" ng-change="changePage()" boundary-links="false"></pagination>
+        <pagination ng-hide="numPages < 2" ng-controller="PagingCtrl" max-size="maxSize" ng-model="currentPage" num-pages="numPages" total-items="totalItems" items-per-page="itemsPerPage" ng-change="changePage()" boundary-links="false"></pagination>
     </div>
 </div>
 @stop
