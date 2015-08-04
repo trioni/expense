@@ -1,0 +1,10 @@
+public/node_modules
+pubilc/bower_components
+*git*
+app/storage
+public/.sass-cache
+public/grunt
+.env*
+deploy.sh
+deploy_excludes.txt
+.idea
