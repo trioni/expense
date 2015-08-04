@@ -12,7 +12,10 @@
 
     <script>
         var app = app || {};
-        var be = {{$be}};
+        var be = {};
+        @if (!empty($be))
+        be = {{$be}};
+        @endif
         be.csrf_token = '{{ csrf_token() }}';
         @yield('headscripts','')
     </script>

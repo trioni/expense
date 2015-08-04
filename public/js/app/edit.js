@@ -3,6 +3,7 @@ app.controller('EditModalCtrl', ['$scope','appConfig','routeBuilder','ExpenseRes
     $scope.config = appConfig;
 
     $rootScope.$on('edit-loaded', function(e,data) {
+        data.expense = parseInt(data.expense);
         $scope.item = data;
     });
 

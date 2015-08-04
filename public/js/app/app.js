@@ -20,7 +20,7 @@ app.config(['$routeProvider', function($routeProvider) {
             controller: 'EditCtrl'
         })
         .when('/expenses/create', {
-            templateUrl: '/partials/create.html',
+            template: '',
             controller: 'CreateCtrl'
         })
         .when('/filter', {

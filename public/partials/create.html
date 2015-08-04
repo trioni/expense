@@ -7,7 +7,7 @@
 
         <div class="form-group mandatory autocomplete">
             <label for="title">Title</label>
-            <input id="title" class="form-control" ng-model="item.title" typeahead="title for title in config.titles | filter:$viewValue | limitTo:8" placeholder="Title" type="text" value=""/>
+            <input id="title" class="form-control" ng-model="item.title" typeahead="title for title in config.titles | filter:$viewValue | limitTo:8" placeholder="Title" type="text" autocomplete="off" value=""/>
         </div>
 
         <form-typefield></form-typefield>
