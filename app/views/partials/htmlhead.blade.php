@@ -13,7 +13,7 @@
     <script>
         var app = app || {};
         var be = {};
-        @if (!empty($be))
+        @if (isset($be))
         be = {{$be}};
         @endif
         be.csrf_token = '{{ csrf_token() }}';
